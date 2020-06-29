@@ -41,6 +41,10 @@ func (queue *TestQueue) AddConsumer(tag string, consumer Consumer) string {
 	return ""
 }
 
+func (queue *TestQueue) RemoveConsumer(name string) bool {
+	return true
+}
+
 func (queue *TestQueue) AddBatchConsumer(tag string, batchSize int, consumer BatchConsumer) string {
 	return ""
 }

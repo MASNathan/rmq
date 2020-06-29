@@ -38,6 +38,7 @@ type Queue interface {
 	AddConsumer(tag string, consumer Consumer) string
 	AddBatchConsumer(tag string, batchSize int, consumer BatchConsumer) string
 	AddBatchConsumerWithTimeout(tag string, batchSize int, timeout time.Duration, consumer BatchConsumer) string
+	RemoveConsumer(name string) bool
 	PurgeReady() int
 	PurgeRejected() int
 	ReturnRejected(count int) int
