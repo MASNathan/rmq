@@ -17,6 +17,7 @@ type Connection interface {
 	OpenQueue(name string) Queue
 	CollectStats(queueList []string) Stats
 	GetOpenQueues() []string
+	CloseConnection() error
 }
 
 // Connection is the entry point. Use a connection to access queues, consumers and deliveries
@@ -60,6 +61,12 @@ func OpenConnection(tag, network, address string, db int) *redisConnection {
 		DB:      int64(db),
 	})
 	return OpenConnectionWithRedisClient(tag, redisClient)
+}
+
+func (connection *redisConnection) CloseConnection() error {
+	connection.Close()
+
+	return connection.redisClient.Close()
 }
 
 // OpenQueue opens and returns the queue with a given name
